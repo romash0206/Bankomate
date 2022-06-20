@@ -33,7 +33,7 @@ public class CardServiceImpl implements CardService {
     }
 
     public String addCash(int amount) {
-
-        return null;
+        this.card.setCashAmount(this.card.getCashAmount() + amount);
+        return "Средства успешно зачислены на Ваш счет";
     }
 }
