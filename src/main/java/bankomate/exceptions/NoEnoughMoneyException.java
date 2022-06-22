@@ -2,6 +2,6 @@ package bankomate.exceptions;
 
 public class NoEnoughMoneyException extends Exception {
     public NoEnoughMoneyException() {
-        super("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃСЂРµРґСЃС‚РІ");
+        super("Недостаточно средств");
     }
 }

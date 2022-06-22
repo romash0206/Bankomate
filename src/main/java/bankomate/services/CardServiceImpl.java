@@ -22,6 +22,15 @@ public class CardServiceImpl implements CardService {
 
     }
 
+    public String transfer(long cardNumber, int amount) throws NoEnoughMoneyException {
+        if (card.getCashAmount() < amount) {
+            throw new NoEnoughMoneyException();
+        }
+        card.setCashAmount(card.getCashAmount() - amount);
+        return "Средства успешно переведены";
+
+    }
+
     public String viewCashAmount() {
         return String.valueOf(card.getCashAmount());
     }
@@ -29,11 +38,11 @@ public class CardServiceImpl implements CardService {
     public String pinChange(int oldPin, int newPin) throws WrongPinException {
         authorizationService.logIn(card, oldPin);
         card.setPin(newPin);
-        return "РџРёРЅ-РєРѕРґ СѓСЃРїРµС€РЅРѕ РёР·РјРµРЅРµРЅ";
+        return "Пин-код успешно изменен";
     }
 
     public String addCash(int amount) {
         this.card.setCashAmount(this.card.getCashAmount() + amount);
-        return "РЎСЂРµРґСЃС‚РІР° СѓСЃРїРµС€РЅРѕ Р·Р°С‡РёСЃР»РµРЅС‹ РЅР° Р’Р°С€ СЃС‡РµС‚";
+        return "Средства успешно зачислены на Ваш счет";
     }
 }
