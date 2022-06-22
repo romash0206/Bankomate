@@ -22,12 +22,13 @@ public class CardServiceImpl implements CardService {
 
     }
 
-    public String transfer(long cardNumber, int amount) throws NoEnoughMoneyException {
+
+    public String transfer(int cardNumber, int amount) throws NoEnoughMoneyException {
         if (card.getCashAmount() < amount) {
             throw new NoEnoughMoneyException();
         }
         card.setCashAmount(card.getCashAmount() - amount);
-        return "Ñðåäñòâà óñïåøíî ïåðåâåäåíû";
+        return "Ð¡Ñ€ÐµÐ´ÑÑ‚Ð²Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¿ÐµÑ€ÐµÐ²ÐµÐ´ÐµÐ½Ñ‹";
 
     }
 
@@ -38,11 +39,11 @@ public class CardServiceImpl implements CardService {
     public String pinChange(int oldPin, int newPin) throws WrongPinException {
         authorizationService.logIn(card, oldPin);
         card.setPin(newPin);
-        return "Ïèí-êîä óñïåøíî èçìåíåí";
+        return "ÐŸÐ¸Ð½-ÐºÐ¾Ð´ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½";
     }
 
     public String addCash(int amount) {
         this.card.setCashAmount(this.card.getCashAmount() + amount);
-        return "Ñðåäñòâà óñïåøíî çà÷èñëåíû íà Âàø ñ÷åò";
+        return "Ð¡Ñ€ÐµÐ´ÑÑ‚Ð²Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð·Ð°Ñ‡Ð¸ÑÐ»ÐµÐ½Ñ‹ Ð½Ð° Ð’Ð°Ñˆ ÑÑ‡ÐµÑ‚";
     }
 }

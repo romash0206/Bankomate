@@ -20,20 +20,20 @@ public class Bankomate {
     }
 
     public void run() {
-        ioService.write("Введите ПИН-код:");
-        ioService.write("Введите 'exit' для выхода");
+        ioService.write("Р’РІРµРґРёС‚Рµ РџРРќ-РєРѕРґ:");
+        ioService.write("Р’РІРµРґРёС‚Рµ 'exit' РґР»СЏ РІС‹С…РѕРґР°");
         readPin();
         operationChoose();
     }
 
     private void operationChoose() {
-        ioService.write("Выберите операцию:");
-        ioService.write("Наберите 1 для просмотра баланса");
-        ioService.write("Наберите 2 для снятия наличных");
-        ioService.write("Наберите 3 для пополнения счета");
-        ioService.write("Наберите 4 для смены ПИН-кода");
-        ioService.write("Наберите 5 для перевода средст на другую карту");
-        ioService.write("Введите 'exit' для выхода");
+        ioService.write("Р’С‹Р±РµСЂРёС‚Рµ РѕРїРµСЂР°С†РёСЋ:");
+        ioService.write("РќР°Р±РµСЂРёС‚Рµ 1 РґР»СЏ РїСЂРѕСЃРјРѕС‚СЂР° Р±Р°Р»Р°РЅСЃР°");
+        ioService.write("РќР°Р±РµСЂРёС‚Рµ 2 РґР»СЏ СЃРЅСЏС‚РёСЏ РЅР°Р»РёС‡РЅС‹С…");
+        ioService.write("РќР°Р±РµСЂРёС‚Рµ 3 РґР»СЏ РїРѕРїРѕР»РЅРµРЅРёСЏ СЃС‡РµС‚Р°");
+        ioService.write("РќР°Р±РµСЂРёС‚Рµ 4 РґР»СЏ СЃРјРµРЅС‹ РџРРќ-РєРѕРґР°");
+        ioService.write("РќР°Р±РµСЂРёС‚Рµ 5 РґР»СЏ РїРµСЂРµРІРѕРґР° СЃСЂРµРґСЃС‚ РЅР° РґСЂСѓРіСѓСЋ РєР°СЂС‚Сѓ");
+        ioService.write("Р’РІРµРґРёС‚Рµ 'exit' РґР»СЏ РІС‹С…РѕРґР°");
         Integer operation = readOperation();
         switch (operation) {
             case 0:
@@ -50,7 +50,7 @@ public class Bankomate {
                 authorizationService.logOut();
                 break;
             case 3:
-                ioService.write("Введите сумму пополнения");
+                ioService.write("Р’РІРµРґРёС‚Рµ СЃСѓРјРјСѓ РїРѕРїРѕР»РЅРµРЅРёСЏ");
                 cardService.addCash(ioService.readInt());
                 ifExit();
                 authorizationService.logOut();
@@ -61,9 +61,9 @@ public class Bankomate {
                 authorizationService.logOut();
                 break;
             case 5:
-                ioService.write("ВВедите номер карты получателя");
-                long cardNumber = ioService.readInt();
-                ioService.write("Введите сумму для перевода");
+                ioService.write("Р’Р’РµРґРёС‚Рµ РЅРѕРјРµСЂ РєР°СЂС‚С‹ РїРѕР»СѓС‡Р°С‚РµР»СЏ");
+                int cardNumber = ioService.readInt();
+                ioService.write("Р’РІРµРґРёС‚Рµ СЃСѓРјРјСѓ РґР»СЏ РїРµСЂРµРІРѕРґР°");
                 int amount = ioService.readInt();
                 try {
 
@@ -81,9 +81,9 @@ public class Bankomate {
     }
 
     private void changePin() {
-        ioService.write("Введите текущий ПИН-код");
+        ioService.write("Р’РІРµРґРёС‚Рµ С‚РµРєСѓС‰РёР№ РџРРќ-РєРѕРґ");
         Integer oldPin = ioService.readInt();
-        ioService.write("Введите новый ПИН-код");
+        ioService.write("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ РџРРќ-РєРѕРґ");
         Integer newPin = ioService.readInt();
         try {
             cardService.pinChange(oldPin, newPin);
@@ -95,7 +95,7 @@ public class Bankomate {
 
     private void cashIssue() {
         try {
-            ioService.write("Введите сумму");
+            ioService.write("Р’РІРµРґРёС‚Рµ СЃСѓРјРјСѓ");
             cardService.cashIssue(ioService.readInt());
         } catch (NoEnoughMoneyException e) {
             ioService.write(e.getMessage());
@@ -106,7 +106,7 @@ public class Bankomate {
 
 
     private void ifExit() {
-        ioService.write("Желаете ли продолжить? y/n");
+        ioService.write("Р–РµР»Р°РµС‚Рµ Р»Рё РїСЂРѕРґРѕР»Р¶РёС‚СЊ? y/n");
         try {
             if (ioService.read().equals("y")) {
                 operationChoose();
