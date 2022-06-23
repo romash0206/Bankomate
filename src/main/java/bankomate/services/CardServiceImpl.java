@@ -23,7 +23,7 @@ public class CardServiceImpl implements CardService {
     }
 
 
-    public String transfer(int cardNumber, int amount) throws NoEnoughMoneyException {
+    public String transfer(long cardNumber, int amount) throws NoEnoughMoneyException {
         if (card.getCashAmount() < amount) {
             throw new NoEnoughMoneyException();
         }

@@ -7,7 +7,7 @@ import bankomate.exceptions.WrongPinException;
 public interface CardService {
     void cashIssue(int amount) throws NoEnoughMoneyException;
 
-    String transfer(int cardNumber, int amount) throws NoEnoughMoneyException;
+    String transfer(long cardNumber, int amount) throws NoEnoughMoneyException;
 
     String viewCashAmount();
 

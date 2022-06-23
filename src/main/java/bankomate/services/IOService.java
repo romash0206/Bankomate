@@ -7,5 +7,6 @@ public interface IOService {
     void write(String message);
     void writeUnknownError();
     public int readInt();
+    public long readLong();
 
 }

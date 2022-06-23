@@ -61,18 +61,7 @@ public class Bankomate {
                 authorizationService.logOut();
                 break;
             case 5:
-                ioService.write("ВВедите номер карты получателя");
-                int cardNumber = ioService.readInt();
-                ioService.write("Введите сумму для перевода");
-                int amount = ioService.readInt();
-                try {
-
-                    String message = cardService.transfer(cardNumber, amount);
-                    ioService.write(message);
-                }
-                catch (NoEnoughMoneyException e){
-                    ioService.write(e.getMessage());
-                }
+                transfer();
                 ifExit();
                 authorizationService.logOut();
                 break;
@@ -100,6 +89,28 @@ public class Bankomate {
         } catch (NoEnoughMoneyException e) {
             ioService.write(e.getMessage());
             cashIssue();
+        }
+    }
+
+    private void transfer() {
+        ioService.write("ВВедите номер карты получателя");
+        long cardNumber = ioService.readLong();
+        transferRetry(cardNumber);
+    }
+
+
+    private void transferRetry(long cardNumber){
+
+        ioService.write("Введите сумму для перевода");
+        int amount = ioService.readInt();
+        try {
+
+            String message = cardService.transfer(cardNumber, amount);
+            ioService.write(message);
+        }
+        catch (NoEnoughMoneyException e){
+            ioService.write(e.getMessage());
+            transferRetry(cardNumber);
         }
     }
 

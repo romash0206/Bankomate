@@ -24,6 +24,14 @@ public class IOServiceImpl implements IOService {
             return readInt();
         }
     }
+    public long readLong() {
+        try {
+            return Long.parseLong(read());
+        } catch (IOException e) {
+            writeUnknownError();
+            return readLong();
+        }
+    }
 
     public void write(String message) {
         System.out.println(message);
